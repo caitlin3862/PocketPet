@@ -9,9 +9,9 @@ public class Pet {
     public Pet(String name){
         this.name = name;
         action = null;
-        hunger = 5;
-        happiness = 5;
-        tiredness = 5;
+        hunger = 3;
+        happiness = 3;
+        tiredness = 3;
     }
 
     public String getName() {
@@ -32,6 +32,28 @@ public class Pet {
 
     public int getTiredness() {
         return tiredness;
+    }
+
+    public void printStats() {
+        System.out.println("Happiness: " + getHappiness());
+        System.out.println("Hunger: " + getHunger());
+        System.out.println("Tiredness: " + getTiredness());
+    }
+
+    public void petFrame1(){
+        System.out.println("              __________                ");
+        System.out.println("            /            \\              ");
+        System.out.println("           |   .      .   |             ");
+        System.out.println("           |     ----     |             ");
+        System.out.println("           |              |             ");
+    }
+
+    public void petFrame2(){
+        System.out.println();
+        System.out.println("              __________                ");
+        System.out.println("            /            \\              ");
+        System.out.println("           |   _      _   |             ");
+        System.out.println("           |     ----     |             ");
     }
 
 }
