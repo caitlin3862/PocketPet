@@ -1,7 +1,6 @@
 public class Day {
 
     public static int numOfDays;
-    private int currentDay;
     private String dayOverview;
     private String time;
     private Pet userPet;
@@ -9,12 +8,16 @@ public class Day {
 
     public Day(Pet userPet){
         numOfDays = 1;
-        currentDay = 1;
         dayOverview = "";
         time = "8:00";
         this.userPet = userPet;
         isDayOver = false;
     }
+
+    public static int getNumOfDays(){
+        return  numOfDays;
+    }
+
 
     public String getTime(){
         return time;
@@ -24,13 +27,19 @@ public class Day {
         return dayOverview;
     }
 
-    public int getCurrentDay(){
-        return currentDay;
+
+    public boolean getIsDayOver(){
+        return isDayOver;
+    }
+
+    public void finishDay(){
+        isDayOver = true;
+        numOfDays++;
     }
 
     public void updateDayOverview(int eventOption){
         if (eventOption == 1) {
-            dayOverview += "You and " + userPet.getName() + " had good conversation \n";
+            dayOverview += "You and " + userPet.getName() + " made good conversation \n";
         } else if (eventOption == 2) {
             dayOverview += "You fed " + userPet.getName() + " well \n";
         } else if (eventOption == 3) {
@@ -39,6 +48,7 @@ public class Day {
             dayOverview += userPet.getName() + " had a nice slumber \n";
         }
     }
+
 
 
 }

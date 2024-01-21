@@ -10,13 +10,13 @@ public class PetUX {
     }
 
     public void welcome(){
-        System.out.println("Good morning! Are you ready to meet your pocket pet? (y/n)");
+        System.out.print("Good morning! Are you ready to meet your pocket pet? (y/n)");
         String ready = scan.nextLine();
         if (ready.equals("y")){
             System.out.println("Great! Let's go to your new place");
             timedClearScreen(2000);
             loadingScreen();
-            timedClearScreen(2000);
+            timedClearScreen(1500);
             System.out.println("Okay, before we go inside I have to talk to you about a few things about your pet.");
             sleep(4000);
             System.out.println("You will be taking care of your pet for a week!");
@@ -35,23 +35,28 @@ public class PetUX {
     public void start(){
         System.out.println("Oh! One more thing! What would you like to name your pet? ");
         String name = scan.nextLine();
-        Pet userPet = new Pet(name);
+        Pet userPet = new Pet(name); // creates new pet
+        PetDrawings draw = new PetDrawings(); // sets the drawings for the pets
+        PetInteraction interact = new PetInteraction(userPet, draw); // interactions for pet
         System.out.println("What a lovely name! Now... Let's go meet your pet!");
         sleep(2000);
-        while (!gameOver) {
+        Day day1 = new Day(userPet); // starts a new day
+        while (!gameOver && Day.getNumOfDays() <= 7) { // game will continue until the game is over or the user reaches 7 days
             userPet.printStats();
-            userPet.petFrame1();
+            draw.petFrame1();
             menu();
             System.out.println("What would you like to do: ");
             int option = scan.nextInt();
             if (option == 1) {
-                System.out.println("hi");
+                interact.talk();
             } else if (option == 2) {
-                System.out.println("hi");
+                interact.feed();
             } else if (option == 3) {
                 System.out.println("hi");
             } else if (option == 4) {
-                System.out.println("hi");
+                interact.petSleep();
+                day1.finishDay(); // ends the current day
+                day1 = new Day(userPet); // starts a new day;
             } else {
                 gameOver = true;
             }
@@ -113,13 +118,14 @@ public class PetUX {
             System.out.println("                           ____   |_()___()_");
             System.out.println("-------------------------------------------");
             timedClearScreen(300);
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println("-------------------------------------------");
-            timedClearScreen(300);
+        }
+    }
+
+    private void sleep(int milliseconds){
+        try {
+            Thread.sleep(milliseconds);
+        } catch (Exception e) {
+            System.out.println("error");
         }
     }
 
@@ -131,14 +137,6 @@ public class PetUX {
         }
         System.out.print("\033\143");
         System.out.flush();
-    }
-
-    private void sleep(int milliseconds){
-        try {
-            Thread.sleep(milliseconds);
-        } catch (Exception e) {
-            System.out.println("error");
-        }
     }
 
 }
