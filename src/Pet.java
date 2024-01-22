@@ -18,26 +18,12 @@ public class Pet {
         return name;
     }
 
-    public String getAction() {
-        if (hunger == 5 && happiness == 5 && energy == 5){
-            return "I am content!";
-        } else if (happiness < hunger && happiness < energy) {
-            action = "play";
-        } else if (hunger < happiness && hunger < energy) {
-            action = "eat";
-        } else if (energy < happiness && energy < hunger){
-            action = "sleep";
+    public String getAction(){
+        if (action.equals("I am content!")){
+            return action;
         } else {
-            int determineAction = (int) (Math.random()*4) + 1;
-            if (determineAction == 1){
-                action = "play";
-            } else if (determineAction == 2){
-                action = "eat";
-            } else {
-                action = "sleep";
-            }
+            return "I want to " + action + ".";
         }
-        return "I want to " + action + ".";
     }
 
     public int getHunger() {
@@ -50,6 +36,27 @@ public class Pet {
 
     public int getEnergy() {
         return energy;
+    }
+
+    public void setAction() {
+        if (hunger == 5 && happiness == 5 && energy == 5){
+            action = "I am content!";
+        } else if (happiness < hunger && happiness < energy) {
+            action = "play \uD83E\uDD0D";
+        } else if (hunger < happiness && hunger < energy) {
+            action = "eat \uD83C\uDF4E";
+        } else if (energy < happiness && energy < hunger){
+            action = "sleep ⚡";
+        } else {
+            int determineAction = (int) (Math.random()*4) + 1;
+            if (determineAction == 1){
+                action = "play \uD83E\uDD0D";
+            } else if (determineAction == 2){
+                action = "eat \uD83C\uDF4E";
+            } else {
+                action = "sleep ⚡";
+            }
+        }
     }
 
     public void updateHunger(int feed){
@@ -65,9 +72,9 @@ public class Pet {
     }
 
     public void printStats() {
-        System.out.println("Happiness: " + happinessToEmojis());
-        System.out.println("Hunger: " + hungerToEmojis());
-        System.out.println("Energy: " + energyToEmojis());
+        System.out.println(ConsoleUtility.PINK + "Happiness: " + happinessToEmojis());
+        System.out.println(ConsoleUtility.RED +  "Hunger: " + ConsoleUtility.RESET + hungerToEmojis());
+        System.out.println(ConsoleUtility.YELLOW + "Energy: " + energyToEmojis() + ConsoleUtility.RESET);
     }
 
     private String happinessToEmojis(){
@@ -89,7 +96,7 @@ public class Pet {
     private String energyToEmojis(){
         String emojis = "";
         for (int i = 0; i < energy; i++){
-            emojis += "\u26A1" + " ";
+            emojis += "⚡" + " ";
         }
         return emojis;
     }

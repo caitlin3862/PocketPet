@@ -1,15 +1,13 @@
 public class Day {
 
-    public static int numOfDays;
+    public static int numOfDays = 0;
     private String dayOverview;
-    private String time;
     private Pet userPet;
     private boolean isDayOver;
 
     public Day(Pet userPet){
-        numOfDays = 1;
+        numOfDays++;
         dayOverview = "";
-        time = "8:00";
         this.userPet = userPet;
         isDayOver = false;
     }
@@ -18,23 +16,16 @@ public class Day {
         return  numOfDays;
     }
 
-
-    public String getTime(){
-        return time;
-    }
-
-    public String getDayOverview(){
-        return dayOverview;
-    }
-
-
-    public boolean getIsDayOver(){
-        return isDayOver;
-    }
-
     public void finishDay(){
         isDayOver = true;
-        numOfDays++;
+    }
+
+    public void printDayOverview(){
+        PetUX.timedClearScreen(1000);
+        System.out.println("|-------------------------------------|");
+        System.out.println("Day " + numOfDays + ":");
+        System.out.println(dayOverview);
+        System.out.println("|-------------------------------------|");
     }
 
     public void updateDayOverview(int eventOption){

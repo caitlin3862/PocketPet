@@ -8,57 +8,87 @@ public class PetInteraction {
     }
 
     public void talk(){
-        for (int i = 0; i < 10; i++) {
+        PetUX.timedClearScreen(100);
+        userPet.setAction();
+        for (int i = 0; i < 4; i++) {
             draw.petFrame1();
             System.out.println("|-------------------------------------|");
-            System.out.println(userPet.getAction());
+            System.out.println("| " + userPet.getName() + ": " + userPet.getAction());
             System.out.println("|-------------------------------------|");
-            timedClearScreen(1500);
+            PetUX.timedClearScreen(1500);
             draw.petFrame2();
             System.out.println("|-------------------------------------|");
-            System.out.println(userPet.getAction());
+            System.out.println("| " + userPet.getName() + ": " + userPet.getAction());
             System.out.println("|-------------------------------------|");
-            timedClearScreen(1500);
+            PetUX.timedClearScreen(1500);
         }
+        PetUX.timedClearScreen(100);
     }
 
     public void feed() {
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 4; i++) {
             System.out.println("You feed " + userPet.getName() + " a treat.");
             draw.petEat();
-            timedClearScreen(1000);
+            PetUX.timedClearScreen(1000);
             System.out.println("You feed " + userPet.getName() + " a treat.");
             draw.petEat2();
-            timedClearScreen(1000);
+            PetUX.timedClearScreen(1000);
         }
         if (!(userPet.getHunger() == 5)){
             userPet.updateHunger(1);
         }
+        // creates a chance for other stats to decrease
+        int stats = (int) (Math.random()*6) + 1;
+        if (stats == 1){
+            if (userPet.getHappiness()!= 0) {
+                userPet.updateHappiness(-1);
+            }
+        } else if (stats == 2){
+            if (userPet.getEnergy()!= 0) {
+                userPet.updateEnergy(-1);
+            }
+        }
     }
 
     public void play(){
-        System.out.println("");
+        draw.petPlay();
+        if (userPet.getHappiness() != 5){
+            userPet.updateHappiness(1);
+        }
+        // creates a chance for other stats to decrease
+        int stats = (int) (Math.random()*6) + 1;
+        if (stats == 1){
+            if (userPet.getHunger()!= 0) {
+                userPet.updateHunger(-1);
+            }
+        } else if (stats == 2){
+            if (userPet.getEnergy()!= 0) {
+                userPet.updateEnergy(-1);
+            }
+        }
     }
 
     public void petSleep(){
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 4; i++) {
             draw.petSleep();
-            timedClearScreen(1500);
+            PetUX.timedClearScreen(1000);
             draw.petSleep2();
+            PetUX.timedClearScreen(1000);
         }
         if (!(userPet.getEnergy() == 5)){
             userPet.updateEnergy(1);
         }
-    }
-
-    private void timedClearScreen(int milliseconds){
-        try {
-            Thread.sleep(milliseconds);
-        } catch (Exception e) {
-            System.out.println("error");
+        // creates a chance for other stats to decrease
+        int stats = (int) (Math.random()*6) + 1;
+        if (stats == 1){
+            if (userPet.getHappiness()!= 0) {
+                userPet.updateHappiness(-1);
+            }
+        } else if (stats == 2){
+            if (userPet.getHunger()!= 0) {
+                userPet.updateHunger(-1);
+            }
         }
-        System.out.print("\033\143");
-        System.out.flush();
     }
 
 
