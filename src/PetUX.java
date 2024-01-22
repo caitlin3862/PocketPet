@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class PetUX {
     private final Scanner scan;
     private boolean gameOver;
+    private String ready;
 
     public PetUX(){
         scan = new Scanner(System.in);
@@ -23,14 +24,14 @@ public class PetUX {
         } catch (Exception e) {
             System.out.println("error");
         }
-        System.out.print("\033\143"); // Found another clear screen code because for some reason the other line of code did not work
+        System.out.print("\033\143"); // Found another clear screen code because for some reason the original line of code did not work
         System.out.flush();
     }
 
     public void welcome(){
         // introduction and tells the user about how to care for their pet
         System.out.print("Good morning! Are you ready to meet your pocket pet? (y/n): " + ConsoleUtility.CYAN);
-        String ready = scan.nextLine();
+        ready = scan.nextLine();
         if (ready.equals("y")){
             System.out.println(ConsoleUtility.RESET + "Great! Let's go to your new place");
             timedClearScreen(2000);
@@ -53,54 +54,56 @@ public class PetUX {
     }
 
     public void start(){
-        System.out.print("Oh! One more thing! What would you like to name your pet? \nEnter a name: " + ConsoleUtility.CYAN);
-        String name = scan.nextLine();
-        Pet userPet = new Pet(name); // creates new pet
-        PetDrawings draw = new PetDrawings(); // sets the drawings for the pets
-        PetInteraction interact = new PetInteraction(userPet, draw); // interactions for pet
-        System.out.println(ConsoleUtility.RESET + "What a lovely name! Now... Let's go meet your pet!");
-        timedClearScreen(2000);
-        Day day1 = new Day(userPet); // starts a new day
-        while (!gameOver && Day.getNumOfDays() <= 7) { // game will continue until the game is over or the user reaches 7 days
-            // Home screen
-            userPet.printStats();
-            System.out.println("Day " + Day.getNumOfDays());
-            draw.petFrame1();
-            menu();
-            // end of home screen
-            System.out.println("What would you like to do: " + ConsoleUtility.CYAN);
-            int option = scan.nextInt();
-            if (option == 1) {
-                timedClearScreen(100);
-                interact.talk();
-                day1.updateDayOverview(option);
-                timedClearScreen(100);
-            } else if (option == 2) {
-                timedClearScreen(100);
-                interact.feed();
-                day1.updateDayOverview(option);
-                timedClearScreen(100);
-            } else if (option == 3) {
-                timedClearScreen(100);
-                interact.play();
-                day1.updateDayOverview(option);
-                timedClearScreen(100);
-            } else if (option == 4) {
-                timedClearScreen(100);
-                interact.petSleep();
-                day1.updateDayOverview(option);
-                day1.printDayOverview(); // prints the day overview
-                day1 = new Day(userPet); // starts a new day;
-            } else {
-                gameOver = true;
+        if (ready.equals("y")) {
+            System.out.print("Oh! One more thing! What would you like to name your pet? \nEnter a name: " + ConsoleUtility.CYAN);
+            String name = scan.nextLine();
+            Pet userPet = new Pet(name); // creates new pet
+            PetDrawings draw = new PetDrawings(); // sets the drawings for the pets
+            PetInteraction interact = new PetInteraction(userPet, draw); // interactions for pet
+            System.out.println(ConsoleUtility.RESET + "What a lovely name! Now... Let's go meet your pet!");
+            timedClearScreen(2000);
+            Day day1 = new Day(userPet); // starts a new day
+            while (!gameOver && Day.getNumOfDays() <= 7) { // game will continue until the game is over or the user reaches 7 days
+                // Home screen
+                userPet.printStats();
+                System.out.println("Day " + Day.getNumOfDays());
+                draw.petFrame1();
+                menu();
+                // end of home screen
+                System.out.println("What would you like to do: " + ConsoleUtility.CYAN);
+                int option = scan.nextInt();
+                if (option == 1) {
+                    timedClearScreen(100);
+                    interact.talk();
+                    day1.updateDayOverview(option);
+                    timedClearScreen(100);
+                } else if (option == 2) {
+                    timedClearScreen(100);
+                    interact.feed();
+                    day1.updateDayOverview(option);
+                    timedClearScreen(100);
+                } else if (option == 3) {
+                    timedClearScreen(100);
+                    interact.play();
+                    day1.updateDayOverview(option);
+                    timedClearScreen(100);
+                } else if (option == 4) {
+                    timedClearScreen(100);
+                    interact.petSleep();
+                    day1.updateDayOverview(option);
+                    day1.printDayOverview(); // prints the day overview
+                    day1 = new Day(userPet); // starts a new day;
+                } else {
+                    gameOver = true;
+                }
             }
+            System.out.println(ConsoleUtility.RESET + "Thank you for playing!");
+            System.out.println("----");
+            System.out.println(userPet.getName() + "'s final stats: ");
+            userPet.printStats();
+            System.out.println("Number of days: " + Day.getNumOfDays());
+            System.out.println("----");
         }
-        System.out.println(ConsoleUtility.RESET + "Thank you for playing!");
-        System.out.println("----");
-        System.out.println(userPet.getName() + "'s final stats: ");
-        userPet.printStats();
-        System.out.println("Number of days: " + Day.getNumOfDays());
-        System.out.println("----");
     }
 
     public void menu(){
