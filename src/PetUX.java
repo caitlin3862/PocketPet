@@ -9,6 +9,24 @@ public class PetUX {
         gameOver = false;
     }
 
+    public static void sleep(int milliseconds){
+        try {
+            Thread.sleep(milliseconds);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+    }
+
+    public static void timedClearScreen(int milliseconds){
+        try {
+            Thread.sleep(milliseconds);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+        System.out.print("\033\143"); // Found another clear screen code because for some reason the other line of code did not work
+        System.out.flush();
+    }
+
     public void welcome(){
         // introduction and tells the user about how to care for their pet
         System.out.print("Good morning! Are you ready to meet your pocket pet? (y/n): " + ConsoleUtility.CYAN);
@@ -71,22 +89,26 @@ public class PetUX {
                 timedClearScreen(100);
                 interact.petSleep();
                 day1.updateDayOverview(option);
-                day1.finishDay(); // ends the current day
                 day1.printDayOverview(); // prints the day overview
                 day1 = new Day(userPet); // starts a new day;
             } else {
                 gameOver = true;
             }
         }
-        System.out.println("Thank you for playing!");
+        System.out.println(ConsoleUtility.RESET + "Thank you for playing!");
+        System.out.println("----");
+        System.out.println(userPet.getName() + "'s final stats: ");
+        userPet.printStats();
+        System.out.println("Number of days: " + Day.getNumOfDays());
+        System.out.println("----");
     }
 
     public void menu(){
         System.out.println("|-------------------------------------|");
         System.out.println("| 1. Talk ");
-        System.out.println("| 2. Feed ");
-        System.out.println("| 3. Play ");
-        System.out.println("| 4. Sleep ");
+        System.out.println("| 2. Feed \uD83C\uDF4E");
+        System.out.println("| 3. Play \uD83E\uDD0D ");
+        System.out.println("| 4. Sleep" + ConsoleUtility.YELLOW + " ⚡ "+ ConsoleUtility.RESET + "(Makes a day pass by)");
         System.out.println("| 5. Exit Game");
         System.out.println("|-------------------------------------|");
     }
@@ -136,24 +158,6 @@ public class PetUX {
             System.out.println("-------------------------------------------");
             timedClearScreen(300);
         }
-    }
-
-    public static void sleep(int milliseconds){
-        try {
-            Thread.sleep(milliseconds);
-        } catch (Exception e) {
-            System.out.println("error");
-        }
-    }
-
-    public static void timedClearScreen(int milliseconds){
-        try {
-            Thread.sleep(milliseconds);
-        } catch (Exception e) {
-            System.out.println("error");
-        }
-        System.out.print("\033\143"); // Found another clear screen code because for some reason the other line of code did not work
-        System.out.flush();
     }
 
 }
