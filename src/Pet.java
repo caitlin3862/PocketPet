@@ -41,14 +41,14 @@ public class Pet {
     public void setAction() {
         if (hunger == 5 && happiness == 5 && energy == 5){
             action = "I am content!";
-        } else if (happiness < hunger && happiness < energy) {
+        } else if (happiness < hunger && happiness < energy) { // if happiness is the lowest stat, the pet wants to play
             action = "play \uD83E\uDD0D";
-        } else if (hunger < happiness && hunger < energy) {
+        } else if (hunger < happiness && hunger < energy) { // if hunger is the lowest stat, the pet wants to eat
             action = "eat \uD83C\uDF4E";
-        } else if (energy < happiness && energy < hunger){
+        } else if (energy < happiness && energy < hunger){ // if energy is the lowest stat, the pet wants to sleep
             action = "sleep ⚡";
         } else {
-            int determineAction = (int) (Math.random()*4) + 1;
+            int determineAction = (int) (Math.random()*4) + 1; // or else randomly determine the action the pet
             if (determineAction == 1){
                 action = "play \uD83E\uDD0D";
             } else if (determineAction == 2){
@@ -77,6 +77,7 @@ public class Pet {
         System.out.println(ConsoleUtility.YELLOW + "Energy: " + energyToEmojis() + ConsoleUtility.RESET);
     }
 
+    /* Private helpers to convert stats to emojis to display */
     private String happinessToEmojis(){
         String emojis = "";
         for (int i = 0; i < happiness; i++){

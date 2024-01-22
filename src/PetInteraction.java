@@ -9,8 +9,8 @@ public class PetInteraction {
 
     public void talk(){
         PetUX.timedClearScreen(100);
-        userPet.setAction();
-        for (int i = 0; i < 4; i++) {
+        userPet.setAction(); // determines the action the pet want
+        for (int i = 0; i < 3; i++) { // plays animation
             draw.petFrame1();
             System.out.println("|-------------------------------------|");
             System.out.println("| " + userPet.getName() + ": " + userPet.getAction());
@@ -26,7 +26,7 @@ public class PetInteraction {
     }
 
     public void feed() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) { // plays animation
             System.out.println("You feed " + userPet.getName() + " a treat.");
             draw.petEat();
             PetUX.timedClearScreen(1000);
@@ -34,7 +34,7 @@ public class PetInteraction {
             draw.petEat2();
             PetUX.timedClearScreen(1000);
         }
-        if (!(userPet.getHunger() == 5)){
+        if (!(userPet.getHunger() == 5)){ // updates hunger status
             userPet.updateHunger(1);
         }
         // creates a chance for other stats to decrease
@@ -51,8 +51,8 @@ public class PetInteraction {
     }
 
     public void play(){
-        draw.petPlay();
-        if (userPet.getHappiness() != 5){
+        draw.petPlay(); // plays animation
+        if (userPet.getHappiness() != 5){ // updates happiness status
             userPet.updateHappiness(1);
         }
         // creates a chance for other stats to decrease
@@ -69,13 +69,13 @@ public class PetInteraction {
     }
 
     public void petSleep(){
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) { // plays animation
             draw.petSleep();
             PetUX.timedClearScreen(1000);
             draw.petSleep2();
             PetUX.timedClearScreen(1000);
         }
-        if (!(userPet.getEnergy() == 5)){
+        if (!(userPet.getEnergy() == 5)){ // update energy status
             userPet.updateEnergy(1);
         }
         // creates a chance for other stats to decrease

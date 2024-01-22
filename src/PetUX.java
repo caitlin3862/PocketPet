@@ -24,7 +24,7 @@ public class PetUX {
             sleep(2000);
             System.out.println("Your pet, like any other pet, has certain needs that should be met!");
             sleep(2000);
-            System.out.println("Your pet's" + ConsoleUtility.PINK + " happiness" + ConsoleUtility.RESET + "," + ConsoleUtility.RED + " hunger" + ConsoleUtility.RESET + ", and "+ ConsoleUtility.YELLOW + "tiredness" + ConsoleUtility.RESET + " will change throughout the day. So make sure you're taking proper care of your pet!");
+            System.out.println("Your pet's" + ConsoleUtility.PINK + " happiness" + ConsoleUtility.RESET + "," + ConsoleUtility.RED + " hunger" + ConsoleUtility.RESET + ", and "+ ConsoleUtility.YELLOW + "energy" + ConsoleUtility.RESET + " will change throughout the day. So make sure you're taking proper care of your pet!");
             sleep(4000);
             System.out.println("Okay! That's it for now. Let's head inside!");
             sleep(1000);
@@ -44,10 +44,12 @@ public class PetUX {
         timedClearScreen(2000);
         Day day1 = new Day(userPet); // starts a new day
         while (!gameOver && Day.getNumOfDays() <= 7) { // game will continue until the game is over or the user reaches 7 days
+            // Home screen
             userPet.printStats();
             System.out.println("Day " + Day.getNumOfDays());
             draw.petFrame1();
             menu();
+            // end of home screen
             System.out.println("What would you like to do: " + ConsoleUtility.CYAN);
             int option = scan.nextInt();
             if (option == 1) {
@@ -70,7 +72,7 @@ public class PetUX {
                 interact.petSleep();
                 day1.updateDayOverview(option);
                 day1.finishDay(); // ends the current day
-                day1.printDayOverview();
+                day1.printDayOverview(); // prints the day overview
                 day1 = new Day(userPet); // starts a new day;
             } else {
                 gameOver = true;

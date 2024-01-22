@@ -29,6 +29,7 @@ public class Day {
     }
 
     public void updateDayOverview(int eventOption){
+        // takes the user option and adds to the corresponding yummy
         if (eventOption == 1) {
             dayOverview += "You and " + userPet.getName() + " made good conversation \n";
         } else if (eventOption == 2) {
